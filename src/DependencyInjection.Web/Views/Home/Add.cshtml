@@ -1,0 +1,25 @@
+﻿@using DependencyInjection.Web.Entities
+@model Character
+@{
+    ViewData["Title"] = "Add New Character";
+}
+
+<div class="page-header">
+    <h1>@ViewBag.Title</h1>
+</div>
+<form class="form-horizontal" asp-controller="Home" asp-action="Add" asp-antiforgery="true">
+    
+    <div class="form-group">
+        <label asp-for="Name" class="control-label col-md-3"></label>
+        <div class="col-md-9">
+            <input type="text" asp-for="Name" class="form-control"/>     
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-md-9 col-md-offset-3">
+            <button type="submit" class="btn btn-default">Save</button>
+        </div>
+    </div>
+
+</form>

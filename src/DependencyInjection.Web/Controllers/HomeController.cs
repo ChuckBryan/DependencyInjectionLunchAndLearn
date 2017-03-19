@@ -1,30 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
-namespace DependencyInjection.Web.Controllers
+﻿namespace DependencyInjection.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Entities;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
+            IList<Character> characters = Character.GetAll();
+
+            return View(characters);
+        }
+
+        public IActionResult Add()
+        {
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Add(Character character)
         {
-            ViewData["Message"] = "Your application description page.";
+            Character.Add(character);
 
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Error()
