@@ -10,8 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace DependencyInjection.Web
 {
-    using Services;
-
     public class Startup
     {
         public Startup(IHostingEnvironment env)

@@ -1,16 +1,26 @@
 ﻿namespace DependencyInjection.Web.Controllers
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
     using Entities;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
 
     public class HomeController : Controller
     {
+        private readonly ICharacterRepository _characterRepository;
+
+        public HomeController() :
+            this(new EFCharacterRepository(new ApplicationDbContext()))
+        {
+            
+        }
+
+        private HomeController(ICharacterRepository characterRepository)
+        {
+            _characterRepository = characterRepository;
+        }
+
         public IActionResult Index()
         {
-            IList<Character> characters = Character.GetAll();
+            var characters = _characterRepository.GetAll();
 
             return View(characters);
         }
@@ -20,10 +30,11 @@
             return View();
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Add(Character character)
         {
-            Character.Add(character);
+            _characterRepository.Add(character);
 
             return RedirectToAction(nameof(Index));
         }
