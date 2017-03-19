@@ -8,8 +8,7 @@
     {
         private static readonly string _table = "Characters";
         private static string _connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=IocLunchAndLearn;
-                    Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;
-                    ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                    Integrated Security=True;";
 
 
         public string Name { get; set; }
