@@ -4,7 +4,6 @@
     using System.Data;
     using System.Data.SqlClient;
 
-    //Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=IocLunchAndLearn;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
     public class Character
     {
         private static readonly string _table = "Characters";
@@ -16,10 +15,11 @@
         public string Name { get; set; }
         public int Id { get; set; }
 
+        #region Methods
         public static IList<Character> GetAll()
         {
             var characters = new List<Character>();
-            
+
             using (var connection = new SqlConnection(_connectionString))
             {
                 var command = new SqlCommand($"SELECT Id, Name FROM {_table}", connection);
@@ -84,5 +84,10 @@
                 connection.Close();
             }
         }
+
+
+        #endregion
+
+
     }
 }
