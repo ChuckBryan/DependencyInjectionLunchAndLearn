@@ -6,14 +6,8 @@
     public class HomeController : Controller
     {
         private readonly ICharacterRepository _characterRepository;
-
-        public HomeController() :
-            this(new EFCharacterRepository(new ApplicationDbContext()))
-        {
-            
-        }
-
-        private HomeController(ICharacterRepository characterRepository)
+        
+        public HomeController(ICharacterRepository characterRepository)
         {
             _characterRepository = characterRepository;
         }

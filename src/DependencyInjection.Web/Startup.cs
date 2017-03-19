@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 
 namespace DependencyInjection.Web
 {
+    using Entities;
+    using Microsoft.EntityFrameworkCore;
+
     public class Startup
     {
         public Startup(IHostingEnvironment env)
@@ -27,6 +30,10 @@ namespace DependencyInjection.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            services.AddScoped<ICharacterRepository, EFCharacterRepository>();
 
 
             // Add framework services.
